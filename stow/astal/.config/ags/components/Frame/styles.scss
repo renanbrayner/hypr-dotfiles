@@ -1,0 +1,24 @@
+// TODO: Ajustar bordas
+window.Frame {
+    margin: -20px -20px 26px -20px;
+    border-radius: 50px;
+}
+
+window.Frame--has-windows {
+    transition: all 100ms ease-in-out;
+    border: 30px solid $bg-color;
+    box-shadow: -0px 0px 15px 0px rgba(0, 0, 0, 0.5) inset;
+}
+
+window.Frame--no-windows {
+    margin: -667px -375px -667px -375px;
+    border: 990px solid $bg-color;
+    border-radius: 100%;
+    background-color: $bg-color;
+    box-shadow: -0px 0px 15px 0px rgba(0, 0, 0, 0) inset;
+    transition: all 200ms ease-in-out;
+    transition-duration: 200ms, 200ms, 200ms, 0ms, 0ms;
+    transition-property:
+        border, border-radius, margin, background-color, box-shadow;
+    transition-delay: 1500ms, 1500ms, 1500ms, 1700ms, 1700ms;
+}

@@ -1,0 +1,25 @@
+.BatteryIcon {
+    padding: 0px 8px;
+    font-size: 1.5rem;
+    font-family: $font_mono;
+}
+
+.battery-critical {
+    color: $STRAWBERRY_300;
+}
+
+.battery-low {
+    color: $ORANGE_300;
+}
+
+.battery-medium {
+    color: $BANANA_300;
+}
+
+.battery-good {
+    color: $LIME_300;
+}
+
+.charging {
+    color: $MINT_300;
+}

@@ -16,13 +16,14 @@ GUI_SYS_CONFIG="nwg-displays nwg-look"
 NETWORK="wireless_tools wavemon iwd"
 ZSH="zsh oh-my-posh"
 XDG="xdg-desktop-portal-gtk xdg-desktop-portal-hyprland xdg-user-dirs xdg-utils"
+BATTERY="upower"
 EXTRA="btrbk btrfs-progs edk2-shell efibootmgr grim hyprland intel-media-driver \
 intel-ucode less libva-intel-driver luarocks ly mandoc network-manager-applet networkmanager \
 polkit-kde-agent qt5-wayland qt6-wayland smartmontools sof-firmware \
 thunar-archive-plugin vim vulkan-intel wget \
 wofi xorg-server xorg-xinit zram-generator"
 
-ALL_PACKAGES="$SYS_MON $AUDIO $TUI_UTILS $CLI_UTILS $TEXT_EDITORS $DEPS $FILE_MANAGER $FONTS $TERMINAL_EMULATORS $BROWSERS $GUI_SYS_CONFIG $NETWORK $ZSH $XDG $EXTRA"
+ALL_PACKAGES="$SYS_MON $AUDIO $TUI_UTILS $CLI_UTILS $TEXT_EDITORS $DEPS $FILE_MANAGER $FONTS $TERMINAL_EMULATORS $BROWSERS $GUI_SYS_CONFIG $NETWORK $ZSH $XDG $EXTRA $BATTERY"
 ALL=$(echo "$ALL_PACKAGES" | tr ' ' '\n' | sort | uniq | tr '\n' ' ')
 
 # Create an associative array to map category names to variable names
@@ -30,6 +31,7 @@ declare -A CATEGORY_MAP
 CATEGORY_MAP["All"]="ALL"
 CATEGORY_MAP["System Monitors"]="SYS_MON"
 CATEGORY_MAP["Audio"]="AUDIO"
+CATEGORY_MAP["Battery"]="BATTERY"
 CATEGORY_MAP["TUI Utils"]="TUI_UTILS"
 CATEGORY_MAP["CLI Utils"]="CLI_UTILS"
 CATEGORY_MAP["Text Editors"]="TEXT_EDITORS"

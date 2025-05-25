@@ -1,0 +1,26 @@
+@import "./variables.scss";
+@import "../../components/Bar/styles.scss";
+@import "../../components/Frame/styles.scss";
+@import "../../components/BatteryIcon/styles.scss";
+@import "../../components/Time/styles.scss";
+
+* {
+    font-family: $font_sans;
+}
+
+.text_small {
+    font-size: 0.75rem;
+}
+
+.mono {
+    font-family: $font_mono;
+}
+
+.color_blueberry_300 {
+    color: $BLUEBERRY_300;
+}
+
+.debug,
+.debug * {
+    outline: 1px solid red;
+}
