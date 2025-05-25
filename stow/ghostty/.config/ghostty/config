@@ -42,3 +42,4 @@
 # # Just for example:
 # resize-overlay-duration = 4s 200ms
 theme = dracula
+confirm-close-surface = false
