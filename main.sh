@@ -9,9 +9,9 @@ if [[ $EUID -eq 0 ]]; then
 fi
 
 actions=(
-    "Install paru:./scripts/install_paru.sh"
-    "Install packages:./scripts/install_packages.sh"
-    "Symlink configs (stow):./scripts/stow_configs.sh"
+    "Install paru:./modules/install_paru.sh"
+    "Install packages:./modules/install_packages.sh"
+    "Symlink configs (stow):./modules/stow_configs.sh"
 )
 
 action_names=()
