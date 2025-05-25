@@ -11,6 +11,7 @@ fi
 actions=(
     "Install paru:./scripts/install_paru.sh"
     "Install packages:./scripts/install_packages.sh"
+    "Symlink configs (stow):./scripts/stow_configs.sh"
 )
 
 action_names=()
