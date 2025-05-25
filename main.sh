@@ -1,4 +1,13 @@
 #!/bin/bash
+    # Check if running as root
+    if [[ $EUID -eq 0 ]]; then
+        echo "You are running this script as root."
+        if ! gum confirm "Running as root may cause issues. Are you sure you to continue?"; then
+            echo "Exiting..."
+            exit 1
+        fi
+    fi
+
 actions=(
     "Install paru:./scripts/install_paru.sh"
     "Install all my most used packages:./scripts/install_all_packages.sh"
