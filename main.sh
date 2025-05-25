@@ -10,8 +10,7 @@ fi
 
 actions=(
     "Install paru:./scripts/install_paru.sh"
-    "Install all my most used packages:./scripts/install_all_packages.sh"
-    "Install selected packages:./scripts/install_selected_packages.sh"
+    "Install packages:./scripts/install_packages.sh"
 )
 
 action_names=()
