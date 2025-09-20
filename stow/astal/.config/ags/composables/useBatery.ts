@@ -1,34 +1,28 @@
+// TODO: fix and use this
 import { bind, Variable } from "astal";
 import Battery from "gi://AstalBattery?version=0.1";
 import { getBatteryIcon } from "../utils/getBatteryIcon";
 
 export const useBattery = () => {
-  // Obtém a instância padrão da bateria
   const battery = Battery.get_default();
 
-  // Variáveis reativas básicas
   const percentage = bind(battery, "percentage");
   const state = bind(battery, "state");
   const timeToFull = bind(battery, "timeToFull");
   const timeToEmpty = bind(battery, "timeToEmpty");
   const charging = bind(battery, "charging");
 
-  // Variáveis derivadas úteis
   const percentageValue = percentage.as((p) => Math.round(p * 100));
 
-  // Variável reativa para a classe CSS
   const batteryClassVar = Variable("");
   const batteryClass = bind(batteryClassVar);
 
-  // Variável reativa para o tooltip
   const tooltipTextVar = Variable("");
   const tooltipText = bind(tooltipTextVar);
 
-  // Variável reativa para o ícone da bateria
   const batteryIconVar = Variable("");
   const batteryIcon = bind(batteryIconVar);
 
-  // Função para determinar a classe CSS com base no nível da bateria
   const getBatteryClass = (level: number, isCharging: boolean) => {
     let className = "";
 
@@ -42,7 +36,6 @@ export const useBattery = () => {
     return className;
   };
 
-  // Função para atualizar a classe CSS
   const updateBatteryClass = () => {
     const level = percentage.get();
     const isCharging = charging.get();
@@ -50,7 +43,6 @@ export const useBattery = () => {
     batteryClassVar.set(className);
   };
 
-  // Função para atualizar o tooltip
   const updateTooltip = () => {
     const isCharging = charging.get();
     const percent = percentageValue.get();
@@ -69,25 +61,21 @@ export const useBattery = () => {
     tooltipTextVar.set(tooltip);
   };
 
-  // Função para atualizar o ícone
   const updateBatteryIcon = () => {
     batteryIconVar.set(getBatteryIcon(battery));
   };
 
-  // Inscreve-se para atualizações
   percentage.subscribe(updateBatteryClass);
   charging.subscribe(updateBatteryClass);
   percentage.subscribe(updateTooltip);
   charging.subscribe(updateTooltip);
   state.subscribe(updateBatteryIcon);
 
-  // Inicializa os valores
   updateBatteryClass();
   updateTooltip();
   updateBatteryIcon();
 
   return {
-    // Propriedades básicas
     percentage,
     percentageValue,
     state,
@@ -95,12 +83,10 @@ export const useBattery = () => {
     timeToEmpty,
     charging,
 
-    // Propriedades derivadas
     batteryClass,
     tooltipText,
     batteryIcon,
 
-    // Métodos úteis (opcional)
     getBatteryClass: (level: number, isCharging: boolean) =>
       getBatteryClass(level, isCharging),
     formatTimeRemaining: (seconds: number) => {

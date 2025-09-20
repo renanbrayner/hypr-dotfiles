@@ -12,6 +12,7 @@ actions=(
     "Install paru:./modules/install_paru.sh"
     "Install packages:./modules/install_packages.sh"
     "Symlink configs (stow):./modules/stow_configs.sh"
+    "Enable services:./modules/systemctl_enable.sh"
 )
 
 action_names=()
