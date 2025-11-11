@@ -18,13 +18,15 @@ ZSH="zsh oh-my-posh"
 XDG="xdg-desktop-portal-gtk xdg-desktop-portal-hyprland xdg-user-dirs xdg-utils"
 BATTERY="upower tlp tlpui"
 BLUETOOTH="blueman"
+CAELESTIA="quickshell-git caelestia-cli ddcutil brightnessctl app2unit libcava networkmanager fish aubio libpipewire glibc qt6-declarative gcc-libs ttf-cascadia-code-nerd ttf-material-symbols-variable-git swappy libqalculate bash qt6-base cmake ninja" # lm-sensors material-symbols
+DEV="asdf-vm"
 EXTRA="btrbk btrfs-progs edk2-shell efibootmgr grim hyprland intel-media-driver \
 intel-ucode less libva-intel-driver luarocks ly mandoc network-manager-applet networkmanager \
 polkit-kde-agent qt5-wayland qt6-wayland smartmontools sof-firmware \
 thunar-archive-plugin vim vulkan-intel wget \
 wofi xorg-server xorg-xinit zram-generator"
 
-ALL_PACKAGES="$SYS_MON $AUDIO $TUI_UTILS $CLI_UTILS $TEXT_EDITORS $DEPS $FILE_MANAGER $FONTS $TERMINAL_EMULATORS $BROWSERS $GUI_SYS_CONFIG $NETWORK $ZSH $XDG $EXTRA $BATTERY $BLUETOOTH"
+ALL_PACKAGES="$SYS_MON $AUDIO $TUI_UTILS $CLI_UTILS $TEXT_EDITORS $DEPS $FILE_MANAGER $FONTS $TERMINAL_EMULATORS $BROWSERS $GUI_SYS_CONFIG $NETWORK $ZSH $XDG $EXTRA $BATTERY $BLUETOOTH $CAELESTIA $DEV"
 ALL=$(echo "$ALL_PACKAGES" | tr ' ' '\n' | sort | uniq | tr '\n' ' ')
 
 # Create an associative array to map category names to variable names
@@ -43,7 +45,9 @@ CATEGORY_MAP["Fonts"]="FONTS"
 CATEGORY_MAP["Terminal Emulators"]="TERMINAL_EMULATORS"
 CATEGORY_MAP["Browsers"]="BROWSERS"
 CATEGORY_MAP["GUI System Config"]="GUI_SYS_CONFIG"
+CATEGORY_MAP["Caelestia"]="CAELESTIA"
 CATEGORY_MAP["Network"]="NETWORK"
+CATEGORY_MAP["Development"]="DEV"
 CATEGORY_MAP["ZSH"]="ZSH"
 CATEGORY_MAP["XDG"]="XDG"
 
