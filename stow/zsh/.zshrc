@@ -21,32 +21,17 @@ zinit light-mode for \
 
 ### End of Zinit's installer chunk
 
-HISTSIZE=50000 # Define o número de comandos a serem armazenados na memória
-SAVEHIST=50000 # Define o número de comandos a serem salvos no arquivo
-HISTFILE=~/.zshhist
-
-setopt HIST_EXPIRE_DUPS_FIRST
-setopt HIST_FIND_NO_DUPS
-setopt HIST_IGNORE_ALL_DUPS
-setopt HIST_IGNORE_DUPS # Não salva comandos duplicados
-setopt HIST_IGNORE_SPACE # Não salva comandos que começam com espaço
-setopt HIST_REDUCE_BLANKS # Remove espaços em branco extras
-setopt HIST_SAVE_NO_DUPS
-setopt INC_APPEND_HISTORY # Adiciona comandos ao histórico imediatamente
-setopt SHARE_HISTORY # Compartilha o histórico entre múltiplas instâncias do zsh
-setopt EXTENDED_HISTORY # Salva comandos que começam com espaço
-setopt HIST_IGNORE_DUPS
+# === Configurações ===
 setopt AUTOCD
 setopt NO_BEEP
 bindkey -e
-
 zstyle ':completion:*' use-cache on
 zstyle ':completion:*' cache-path ~/.zsh/cache
 mkdir -p ~/.zsh/cache
-
 autoload -Uz compinit
 compinit -C
 
+# === Prompt ===
 # Usa oh-my-posh fora do tty
 if [[ -n $DISPLAY ]]; then
   eval "$(oh-my-posh init zsh --config '~/.config/oh-my-posh/themes/dracula.omp.json')"
@@ -65,6 +50,7 @@ if [[ "$TERM" = "linux" ]]; then
   zle -N zle-keymap-select
 fi
 
+# === Plguins ===
 # plugins gerais
 zinit light "zsh-users/zsh-autosuggestions"
 zinit light "zdharma-continuum/fast-syntax-highlighting"
@@ -72,12 +58,19 @@ ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=8'
 zinit light "zsh-users/zsh-completions"
 zinit ice wait lucid atclone'./install --bin' atpull'%atclone'
 zinit light junegunn/fzf
+export ATUIN_NOBIND="true"
+eval "$(atuin init zsh)"
+bindkey '^R' atuin-up-search-viins
 
 # plugins desativados no tty
 if [[ -n $DISPLAY ]]; then
     zinit light "jeffreytse/zsh-vi-mode"
+    function zvm_after_lazy_keybindings() {
+       bindkey '^r' atuin-up-search-viins
+    }
 fi
 
+# === Aliases ===
 # aliases gerais
 alias e='exit'
 alias vim='nvim'
@@ -95,9 +88,12 @@ fi
 
 eval "$(zoxide init zsh)"
 
+# === Exports/Path ===
 # exports
 fpath=(${ASDF_DATA_DIR:-$HOME/.asdf}/completions $fpath)
 export PATH="$HOME/.local/bin:$HOME/bin:$PATH"
 export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
 export PATH="$PATH:/home/renan/.dotnet/tools"
+
+# === Misc ===
 [ -f ~/.secrets ] && source ~/.secrets
