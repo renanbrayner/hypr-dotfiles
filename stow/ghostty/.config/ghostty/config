@@ -41,6 +41,14 @@
 # # which is explained in the docs for that config option.
 # # Just for example:
 # resize-overlay-duration = 4s 200ms
+# custom-sh
+
 theme = dracula
 confirm-close-surface = false
 keybind = shift+enter=text:\x1b\r
+font-size = 11
+# font-family = KelmscottMono Nerd Font Mono
+
+## https://github.com/KroneCorylus/ghostty-shader-playground
+## https://github.com/hackrmomo/ghostty-shaders
+custom-shader = shaders/cursor_blaze.glsl
