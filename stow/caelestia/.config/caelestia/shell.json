@@ -279,6 +279,14 @@
                 "command": ["systemctl", "suspend"],
                 "enabled": true,
                 "dangerous": false
+            },
+            {
+                "name": "RDP Servidor",
+                "icon": "computer",
+                "description": "Conectar ao servidor via RDP",
+                "command": ["sh", "/home/renan/.config/caelestia/scripts/connect-rdp.sh"],
+                "enabled": true,
+                "dangerous": false
             }
         ],
         "dragThreshold": 50,

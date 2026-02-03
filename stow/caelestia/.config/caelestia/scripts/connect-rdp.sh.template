@@ -1,0 +1,2 @@
+#!/bin/sh
+remmina -c "rdp://user:password@address:port" # simple as :)
