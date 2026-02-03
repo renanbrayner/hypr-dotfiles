@@ -5,7 +5,7 @@ cd "$(dirname "$0")" || exit 1
 SYS_MON="btop htop wavemon mission-center"
 AUDIO="gst-plugin-pipewire helvum pavucontrol pipewire pipewire-alsa pipewire-jack pipewire-pulse libpulse wireplumber"
 TUI_UTILS="lazygit lazydocker ranger tmux"
-CLI_UTILS="jq neofetch mise bat eza reflector atuin"
+CLI_UTILS="jq fastfetch mise bat eza reflector atuin"
 TEXT_EDITORS="neovim nano micro zed"
 DEPS="brightnessctl jq aylurs-gtk-shell-git reflector xdg-user-dirs gvfs gvfs-afc gvfs-gphoto2 gvfs-mtp gvfs-smb hyprpaper hyprpicker slurp stow wl-clipboard tlp atuin"
 FILE_MANAGER="file-roller thunar ranger superfile"
