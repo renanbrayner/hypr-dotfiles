@@ -15,10 +15,10 @@ sidebar_border = "#282a36"
 footer_border = "#6272a4"
 
 # ========= Border Active =========
-file_panel_border_active = "#44475a"
-sidebar_border_active = "#44475a"
-footer_border_active = "#44475a"
-modal_border_active = "#44475a"
+file_panel_border_active = "#ff79c6"
+sidebar_border_active = "#ff79c6"
+footer_border_active = "#ff79c6"
+modal_border_active = "#ff79c6"
 
 # ========= Background (bg) =========
 full_screen_bg = "#282a36"
