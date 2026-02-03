@@ -94,6 +94,7 @@ fpath=(${ASDF_DATA_DIR:-$HOME/.asdf}/completions $fpath)
 export PATH="$HOME/.local/bin:$HOME/bin:$PATH"
 export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
 export PATH="$PATH:/home/renan/.dotnet/tools"
+export EDITOR="nvim"
 
 # === Misc ===
 [ -f ~/.secrets ] && source ~/.secrets
