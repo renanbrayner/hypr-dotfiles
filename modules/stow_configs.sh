@@ -2,6 +2,16 @@
 DOTFILES_DIR="$HOME/.dotfiles/stow"
 TARGET_DIR="$HOME"
 
+if ! command -v stow > /dev/null 2>&1; then
+    echo "GNU Stow is not installed."
+    if gum confirm "Install stow using pacman?"; then
+        sudo pacman -S --noconfirm stow
+    else
+        echo "Stow is required. Exiting."
+        exit 1
+    fi
+fi
+
 if [ ! -d "$DOTFILES_DIR" ]; then
     echo "Directory $DOTFILES_DIR not found."
     exit 1
