@@ -25,6 +25,24 @@ ensure_gum() {
 clear
 ensure_gum
 
+DOTFILES_DIR="$HOME/.dotfiles"
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+
+if [[ "$SCRIPT_DIR" != "$DOTFILES_DIR" ]]; then
+    echo "This script is located at $SCRIPT_DIR"
+    echo "It should be placed in $DOTFILES_DIR"
+    if gum confirm "Move it to $DOTFILES_DIR and continue?"; then
+        mkdir -p "$DOTFILES_DIR"
+        cp -a "$SCRIPT_DIR"/. "$DOTFILES_DIR"/
+        cd "$DOTFILES_DIR" || exit 1
+        ./main.sh
+        exit $?
+    else
+        echo "Exiting."
+        exit 1
+    fi
+fi
+
 if [[ $EUID -eq 0 ]]; then
     echo "You are running this script as root."
     if ! gum confirm "Running as root may cause issues. Are you sure you to continue?"; then
