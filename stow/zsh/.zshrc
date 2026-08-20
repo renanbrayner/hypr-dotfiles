@@ -72,6 +72,8 @@ fi
 
 # === Aliases ===
 # aliases gerais
+alias lg='lazygit'
+alias ld='lazydocker'
 alias e='exit'
 alias vim='nvim'
 alias learn='cd ~/code/learn/'
@@ -92,9 +94,11 @@ eval "$(zoxide init zsh)"
 # exports
 fpath=(${ASDF_DATA_DIR:-$HOME/.asdf}/completions $fpath)
 export PATH="$HOME/.local/bin:$HOME/bin:$PATH"
+export PATH="$HOME/.cargo/bin:$PATH"
 export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
 export PATH="$PATH:/home/renan/.dotnet/tools"
-export EDITOR="nvim"
+fpath+=~/.zfunc; autoload -Uz compinit; compinit
 
+export EDITOR="nvim"
 # === Misc ===
 [ -f ~/.secrets ] && source ~/.secrets

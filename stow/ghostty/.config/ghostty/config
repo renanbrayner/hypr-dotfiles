@@ -43,12 +43,18 @@
 # resize-overlay-duration = 4s 200ms
 # custom-sh
 
+# font-family = TamzenForPowerline
+# font-family = Cozette
+# font-size = 15
+font-size = 11
 theme = dracula
 confirm-close-surface = false
 keybind = shift+enter=text:\x1b\r
-font-size = 11
 # font-family = KelmscottMono Nerd Font Mono
 
 ## https://github.com/KroneCorylus/ghostty-shader-playground
 ## https://github.com/hackrmomo/ghostty-shaders
 custom-shader = shaders/cursor_blaze.glsl
+# custom-shader = shaders/cursor_smear.glsl
+# custom-shader = shaders/cursor_frozen.glsl
+# custom-shader = shaders/cursor_border_1.glsl
