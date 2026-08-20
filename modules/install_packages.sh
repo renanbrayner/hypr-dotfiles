@@ -55,11 +55,10 @@ CATEGORIES=$(printf "%s\n" "${!CATEGORY_MAP[@]}" | sort)
 
 SELECTED_CATEGORIES=$(echo "$CATEGORIES" | gum choose --no-limit --header "Select package categories to install (check other pages):")
 
-for category in $SELECTED_CATEGORIES; do
+while IFS= read -r category; do
+    [[ -z "$category" ]] && continue
     var_name=${CATEGORY_MAP["$category"]}
-
     packages=${!var_name}
-
     echo "Installing $category packages..."
     paru -Syu --needed --noconfirm $packages
-done
+done <<< "$SELECTED_CATEGORIES"
