@@ -13,8 +13,8 @@ hl.config({
         border_size = 2,
 
         col = {
-            active_border   = "rgba(BD93F9FF)",
-            inactive_border = "rgba(44475AFF)",
+            active_border   = "rgba(268BD2FF)",
+            inactive_border = "rgba(586E75FF)",
         },
 
         resize_on_border = false,
@@ -100,8 +100,8 @@ hl.config({
 -- Input
 hl.config({
     input = {
-        kb_layout  = "us,br",
-        kb_variant = "altgr-intl",
+        kb_layout  = "br, us",
+        kb_variant = "thinkpad, altgr-intl",
         kb_model   = "",
         kb_options = "",
         kb_rules   = "",

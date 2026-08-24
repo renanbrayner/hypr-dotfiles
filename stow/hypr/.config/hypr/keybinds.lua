@@ -6,11 +6,28 @@ require("programs")
 
 local mainMod = "SUPER"
 
--- Workspace offset helper (replaces scripts/offset-by-display.sh).
----- DP-1 hosts workspaces 1-5, HDMI-A-1 hosts 6-10.
+-- Monitor identity: esquerda = primary (1-5 / Super+,),
+-- direita = secondary (6-10 / Super+.). Estável através de reboots
+-- enquanto a ordem física não mudar. Usa desc: (EDID) em vez do
+-- nome do output, então funciona com qualquer nomenclatura
+-- (eDP-1, DP-1, HDMI-A-1, ...).
+local monitorsList = hl.get_monitors() or {}
+table.sort(monitorsList, function(a, b) return (a.x or 0) < (b.x or 0) end)
+local leftMon  = monitorsList[1]
+local rightMon = monitorsList[2]
+
+local function monitorRef(m)
+    if not m then return nil end
+    if m.description and m.description ~= "" then
+        return "desc:" .. m.description
+    end
+    return m.name
+end
+
+-- Workspace offset: primary usa 1..5, qualquer outro usa 6..10.
 local function wsNum(num, offset)
     local m = hl.get_active_monitor()
-    if m and m.name == "DP-1" then
+    if leftMon and m and m.id == leftMon.id then
         return num
     end
     return num + offset
@@ -63,17 +80,12 @@ hl.bind(mainMod .. " + K",          hl.dsp.window.cycle_next({ next = false }))
 hl.bind(mainMod .. " + SHIFT + J",  hl.dsp.window.swap({ next = true }))
 hl.bind(mainMod .. " + SHIFT + K",  hl.dsp.window.swap({ prev = true }))
 
--- Workspace switch (DP-1: 1-5, HDMI-A-1: 6-10)
+-- Workspace switch (workspaces 1-5)
 hl.bind(mainMod .. " + 1",  function() hl.dispatch(hl.dsp.focus({ workspace = wsNum(1,  5) })) end)
 hl.bind(mainMod .. " + 2",  function() hl.dispatch(hl.dsp.focus({ workspace = wsNum(2,  5) })) end)
 hl.bind(mainMod .. " + 3",  function() hl.dispatch(hl.dsp.focus({ workspace = wsNum(3,  5) })) end)
 hl.bind(mainMod .. " + 4",  function() hl.dispatch(hl.dsp.focus({ workspace = wsNum(4,  5) })) end)
 hl.bind(mainMod .. " + 5",  function() hl.dispatch(hl.dsp.focus({ workspace = wsNum(5,  5) })) end)
-hl.bind(mainMod .. " + F1", function() hl.dispatch(hl.dsp.focus({ workspace = wsNum(6,  5) })) end)
-hl.bind(mainMod .. " + F2", function() hl.dispatch(hl.dsp.focus({ workspace = wsNum(7,  5) })) end)
-hl.bind(mainMod .. " + F3", function() hl.dispatch(hl.dsp.focus({ workspace = wsNum(8,  5) })) end)
-hl.bind(mainMod .. " + F4", function() hl.dispatch(hl.dsp.focus({ workspace = wsNum(9,  5) })) end)
-hl.bind(mainMod .. " + F5", function() hl.dispatch(hl.dsp.focus({ workspace = wsNum(10, 5) })) end)
 
 -- Move window to workspace
 hl.bind(mainMod .. " + SHIFT + 1",  function() hl.dispatch(hl.dsp.window.move({ workspace = wsNum(1,  5) })) end)
@@ -81,17 +93,20 @@ hl.bind(mainMod .. " + SHIFT + 2",  function() hl.dispatch(hl.dsp.window.move({ 
 hl.bind(mainMod .. " + SHIFT + 3",  function() hl.dispatch(hl.dsp.window.move({ workspace = wsNum(3,  5) })) end)
 hl.bind(mainMod .. " + SHIFT + 4",  function() hl.dispatch(hl.dsp.window.move({ workspace = wsNum(4,  5) })) end)
 hl.bind(mainMod .. " + SHIFT + 5",  function() hl.dispatch(hl.dsp.window.move({ workspace = wsNum(5,  5) })) end)
-hl.bind(mainMod .. " + SHIFT + F1", function() hl.dispatch(hl.dsp.window.move({ workspace = wsNum(6,  5) })) end)
-hl.bind(mainMod .. " + SHIFT + F2", function() hl.dispatch(hl.dsp.window.move({ workspace = wsNum(7,  5) })) end)
-hl.bind(mainMod .. " + SHIFT + F3", function() hl.dispatch(hl.dsp.window.move({ workspace = wsNum(8,  5) })) end)
-hl.bind(mainMod .. " + SHIFT + F4", function() hl.dispatch(hl.dsp.window.move({ workspace = wsNum(9,  5) })) end)
-hl.bind(mainMod .. " + SHIFT + F5", function() hl.dispatch(hl.dsp.window.move({ workspace = wsNum(10, 5) })) end)
 
--- Focus / move window to monitor
-hl.bind(mainMod .. " + period",     hl.dsp.focus({ monitor = "DP-1"     }))
-hl.bind(mainMod .. " + comma",      hl.dsp.focus({ monitor = "HDMI-A-1" }))
-hl.bind(mainMod .. " + SHIFT + period", hl.dsp.window.move({ monitor = "DP-1"     }))
-hl.bind(mainMod .. " + SHIFT + comma",  hl.dsp.window.move({ monitor = "HDMI-A-1" }))
+-- Focus / move window to monitor (left = primary, right = secondary)
+hl.bind(mainMod .. " + period", function()
+    if rightMon then hl.dispatch(hl.dsp.focus({ monitor = monitorRef(rightMon) })) end
+end)
+hl.bind(mainMod .. " + comma", function()
+    if leftMon then hl.dispatch(hl.dsp.focus({ monitor = monitorRef(leftMon) })) end
+end)
+hl.bind(mainMod .. " + SHIFT + period", function()
+    if rightMon then hl.dispatch(hl.dsp.window.move({ monitor = monitorRef(rightMon) })) end
+end)
+hl.bind(mainMod .. " + SHIFT + comma", function()
+    if leftMon then hl.dispatch(hl.dsp.window.move({ monitor = monitorRef(leftMon) })) end
+end)
 
 -- Scratchpad
 hl.bind(mainMod .. " + M",          hl.dsp.exec_cmd("caelestia toggle specialws"))
