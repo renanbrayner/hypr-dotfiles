@@ -25,9 +25,13 @@ local function monitorRef(m)
 end
 
 -- Workspace offset: primary usa 1..5, qualquer outro usa 6..10.
+-- Recalcula leftMon a cada chamada pra evitar stale state do startup.
 local function wsNum(num, offset)
     local m = hl.get_active_monitor()
-    if leftMon and m and m.id == leftMon.id then
+    local ml = hl.get_monitors() or {}
+    table.sort(ml, function(a, b) return (a.x or 0) < (b.x or 0) end)
+    local lm = ml[1]
+    if lm and m and m.id == lm.id then
         return num
     end
     return num + offset
