@@ -100,16 +100,28 @@ hl.bind(mainMod .. " + SHIFT + 5",  function() hl.dispatch(hl.dsp.window.move({ 
 
 -- Focus / move window to monitor (left = primary, right = secondary)
 hl.bind(mainMod .. " + period", function()
-    if rightMon then hl.dispatch(hl.dsp.focus({ monitor = monitorRef(rightMon) })) end
+    local ml = hl.get_monitors() or {}
+    table.sort(ml, function(a, b) return (a.x or 0) < (b.x or 0) end)
+    local right = ml[#ml]
+    if right then hl.dispatch(hl.dsp.focus({ monitor = monitorRef(right) })) end
 end)
 hl.bind(mainMod .. " + comma", function()
-    if leftMon then hl.dispatch(hl.dsp.focus({ monitor = monitorRef(leftMon) })) end
+    local ml = hl.get_monitors() or {}
+    table.sort(ml, function(a, b) return (a.x or 0) < (b.x or 0) end)
+    local left = ml[1]
+    if left then hl.dispatch(hl.dsp.focus({ monitor = monitorRef(left) })) end
 end)
 hl.bind(mainMod .. " + SHIFT + period", function()
-    if rightMon then hl.dispatch(hl.dsp.window.move({ monitor = monitorRef(rightMon) })) end
+    local ml = hl.get_monitors() or {}
+    table.sort(ml, function(a, b) return (a.x or 0) < (b.x or 0) end)
+    local right = ml[#ml]
+    if right then hl.dispatch(hl.dsp.window.move({ monitor = monitorRef(right) })) end
 end)
 hl.bind(mainMod .. " + SHIFT + comma", function()
-    if leftMon then hl.dispatch(hl.dsp.window.move({ monitor = monitorRef(leftMon) })) end
+    local ml = hl.get_monitors() or {}
+    table.sort(ml, function(a, b) return (a.x or 0) < (b.x or 0) end)
+    local left = ml[1]
+    if left then hl.dispatch(hl.dsp.window.move({ monitor = monitorRef(left) })) end
 end)
 
 -- Scratchpad
