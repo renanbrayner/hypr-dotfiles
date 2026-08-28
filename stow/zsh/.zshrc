@@ -56,7 +56,7 @@ fi
 nvim-minimal() {
     NVIM_APPNAME=nvim-minimal command nvim "$@"
 }
-export EDITOR='/home/gremlin/.local/bin/nvim-minimal'
+export EDITOR="$HOME/.local/bin/nvim-minimal"
 
 # plugins gerais
 zinit light "zsh-users/zsh-autosuggestions"
@@ -92,7 +92,7 @@ alias neofetch='neofetch --config ~/.config/neofetch.conf'
 # aliases fora do tty
 if [[ -n $DISPLAY ]]; then
     alias ls="exa -a --group-directories-first --icons always" || alias ls="exa -a --group-directories-first"
-    alias tree='f(){exa -T -a --group-directories-first --icons "$@"; unset -f f; }; f' || alias tree='f(){exa -T -a --group-directories-first "$@"; unset -f f; }; f'
+    alias tree='f(){exa -T -a --group-directories-first --icons always "$@"; unset -f f; }; f' || alias tree='f(){exa -T -a --group-directories-first "$@"; unset -f f; }; f'
 fi
 
 eval "$(zoxide init zsh)"
