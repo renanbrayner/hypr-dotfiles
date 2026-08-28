@@ -51,6 +51,13 @@ if [[ "$TERM" = "linux" ]]; then
 fi
 
 # === Plguins ===
+
+
+nvim-minimal() {
+    NVIM_APPNAME=nvim-minimal command nvim "$@"
+}
+export EDITOR='/home/gremlin/.local/bin/nvim-minimal'
+
 # plugins gerais
 zinit light "zsh-users/zsh-autosuggestions"
 zinit light "zdharma-continuum/fast-syntax-highlighting"
@@ -98,7 +105,5 @@ export PATH="$HOME/.cargo/bin:$PATH"
 export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
 export PATH="$PATH:/home/renan/.dotnet/tools"
 fpath+=~/.zfunc; autoload -Uz compinit; compinit
-
-export EDITOR="nvim"
 # === Misc ===
 [ -f ~/.secrets ] && source ~/.secrets
